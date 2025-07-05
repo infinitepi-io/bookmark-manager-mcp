@@ -73,3 +73,9 @@
    List all bookmarks
    Show me bookmarks in the general category
    ```
+
+### Docker
+
+```
+docker run -v ~/.data:/app/.data your-dockerhub-username/bookmark-manager-mcp:latest
+```

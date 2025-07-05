@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-rm -rf dist
-pnpm install
-npm run build
-pnpm inspect
+# Start the MCP server using Docker Compose
+docker build -t mcp/bookmark-manager-mcp .
+claude mcp add bookmark-manager -- docker run \
+            --rm \
+            --interactive \
+            --env FASTMCP_LOG_LEVEL=ERROR \
+            --env AWS_DOCUMENTATION_PARTITION=aws \
+            mcp/bookmark-manager-mcp:latest
