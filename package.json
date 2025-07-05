@@ -1,0 +1,27 @@
+{
+  "name": "bookmark-manager-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for keep the documents",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node index.ts",
+    "build": "esbuild index.ts --bundle --platform=node --target=node22 --format=esm --outfile=dist/index.js",
+    "build:start": "npm run build && node dist/index.js",
+    "start": "node dist/index.js",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js"
+
+  },
+  "author": "Satish Tripathi",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.2",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.0.0",
+    "@types/node": "^24.0.0"
+  }
+}

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+rm -rf dist
+pnpm install
+npm run build
+pnpm inspect
