@@ -9,7 +9,8 @@ COPY package.json pnpm-lock.yaml ./
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 # Copy source code
-COPY . .
+COPY src/ ./src/
+COPY tsconfig.json ./
 # Build the application
 RUN pnpm run build
 # Add documentation labels
