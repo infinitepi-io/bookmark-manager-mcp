@@ -52,10 +52,11 @@ pnpm start
 ### MCP Tools Available
 
 1. **Add Bookmark** (`add`)
+
    - Add new bookmarks with title, URL, and optional category
    - Validates URLs and provides feedback
-
 2. **List Bookmarks** (`list`)
+
    - Display all bookmarks in JSON format
    - Supports filtering by category
 
@@ -189,11 +190,12 @@ esbuild index.ts --bundle --platform=node --target=node22 --format=esm --outfile
 
 ## 📝 License
 
-This project is licensed under the ISC License.
+This project is licensed under the Apache License 2.0.
 
 ## 👤 Author
 
 **Satish Tripathi**
+
 - GitHub: [@infinitepi-io](https://github.com/infinitepi-io)
 
 ## 🆘 Support
