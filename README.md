@@ -200,7 +200,7 @@ This project is licensed under the ISC License.
 
 - **Issues**: [GitHub Issues](https://github.com/infinitepi-io/bookmark-manager-mcp/issues)
 - **Documentation**: [MCP Documentation](https://modelcontextprotocol.io/introduction)
-- **Docker Hub**: [mindriftfall2infinitepiio/mcp](https://hub.docker.com/r/mindriftfall2infinitepiio/mcp)
+- **Docker Hub**: [mindriftfall2infinitepiio/mcp](https://hub.docker.com/r/mindriftfall2infinitepiio/bookmark-manager-mcp)
 
 ---
 
