@@ -1,5 +1,8 @@
 import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+import { mkdir, open } from 'fs/promises'
+import { dirname, join } from 'path'
+import { homedir } from 'os'
 // Zod is a TypeScript schema validation library used for runtime type checking and validation
 // It helps define the structure and validation rules for input data in MCP tool schemas
 import { z } from 'zod'
@@ -9,6 +12,29 @@ const server = new McpServer({
   name: 'bookmark-manager',
   version: '1.0.0'
 })
+
+// Simple bookmark storage
+type bookmark = {
+  title: string,
+  url: string,
+  category: string
+}
+
+const bookMarkFileName = process.env.BOOKMARKS_FILE || join(homedir(), '.data', 'bookmarks.json')
+
+async function saveBookmarks (bookmarksToSave: bookmark[]): Promise<void> {
+  let fileHandle
+  try {
+    fileHandle = await open(bookMarkFileName, 'w')
+    await fileHandle.writeFile(JSON.stringify(bookmarksToSave, null, 2))
+  } catch (error) {
+    throw new Error(`Failed to save bookmarks: ${error instanceof Error ? error.message : 'Unknown error'}`)
+  } finally {
+    if (fileHandle) {
+      await fileHandle.close()
+    }
+  }
+}
 
 // Add a bookmark tool
 server.registerTool('add',
@@ -24,6 +50,7 @@ server.registerTool('add',
   async ({ title, url, category = 'general' }) => {
     const bookmark = { title, url, category }
     bookmarks.push(bookmark)
+    await saveBookmarks(bookmarks)
 
     return {
       content: [{
@@ -51,16 +78,28 @@ server.registerTool('list',
   }
 )
 
-// Simple bookmark storage
-type bookmark = {
-  title: string,
-  url: string,
-  category: string
+async function loadBookmarks (): Promise<bookmark[]> {
+  let fileHandle
+  try {
+    fileHandle = await open(bookMarkFileName, 'r')
+    const data = await fileHandle.readFile('utf-8')
+    return JSON.parse(data)
+  } catch (error) {
+    await mkdir(dirname(bookMarkFileName), { recursive: true })
+    const defaultBookmarks: bookmark[] = [
+      { title: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/introduction', category: 'mcp' },
+      { title: 'infinitepi-io', url: 'https://github.com/infinitepi-io', category: 'general' }
+    ]
+    await saveBookmarks(defaultBookmarks)
+    return defaultBookmarks
+  } finally {
+    if (fileHandle) {
+      await fileHandle.close()
+    }
+  }
 }
-const bookmarks: bookmark[] = [
-  { title: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/introduction', category: 'mcp' },
-  { title: 'infinitepi-io', url: 'https://github.com/infinitepi-io', category: 'general' }
-]
+
+const bookmarks: bookmark[] = await loadBookmarks()
 
 // Bookmark inventory resource
 server.registerResource(

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Start the MCP server using Docker Compose
-docker build -t mcp/bookmark-manager-mcp .
+# Start the MCP server using Docker
+docker build -t mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0 .
 claude mcp add bookmark-manager -- docker run \
             --rm \
             --interactive \
+            --volume ~/.data:/app/.data \
             --env FASTMCP_LOG_LEVEL=ERROR \
             --env AWS_DOCUMENTATION_PARTITION=aws \
-            mcp/bookmark-manager-mcp:latest
+            mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0

@@ -18,6 +18,11 @@ LABEL org.opencontainers.image.description="MCP server for bookmark management w
 LABEL org.opencontainers.image.documentation="Data stored in ~/.data/bookmarks.json on host"
 LABEL usage="docker run -v ~/.data:/app/.data mindriftfall2infinitepiio/mcp:bookmark-manager-v1.0.0"
 LABEL data.storage="~/.data/bookmarks.json"
+LABEL org.opencontainers.image.source="https://github.com/infinitepi-io/bookmark-manager-mcp"
+LABEL org.opencontainers.image.description="MCP server for bookmark management with persistent storage"
+LABEL org.opencontainers.image.documentation="https://github.com/infinitepi-io/bookmark-manager-mcp/blob/main/README.md"
+# Set environment variable for bookmark file location
+ENV BOOKMARKS_FILE=/app/.data/bookmarks.json
 # Create volume mount point for local .data directory
 VOLUME ["/app/.data"]
 # Expose port (if needed for debugging/monitoring)

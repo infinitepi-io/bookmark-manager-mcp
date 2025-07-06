@@ -28,6 +28,7 @@ pnpm-debug.log*
 .DS_Store
 .AppleDouble
 .LSOverride
+TODO.md
 
 # Coverage directory
 coverage/
