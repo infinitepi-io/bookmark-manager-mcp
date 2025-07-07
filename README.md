@@ -29,6 +29,18 @@ This MCP server provides a simple yet powerful bookmark management system that i
 docker run -v ~/.data:/app/.data mindriftfall2infinitepiio/mcp:bookmark-manager-v1.0.0
 ```
 
+## 🔧 Claude Code Integration
+
+```bash
+# Add to Claude Code
+docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0
+claude mcp add bookmark-manager -- docker run \
+    --rm \
+    --interactive \
+    --volume ~/.data:/app/.data \
+    mindriftfall2infinitepiio/mcp:bookmark-manager-v1.0.0
+```
+
 ### Local Development
 
 ```bash
