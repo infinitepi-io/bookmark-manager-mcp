@@ -5,5 +5,4 @@ claude mcp add bookmark-manager -- docker run \
             --rm \
             --interactive \
             --volume ~/.data:/app/.data \
-            --env FASTMCP_LOG_LEVEL=ERROR \
             mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0
