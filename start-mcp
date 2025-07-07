@@ -6,5 +6,4 @@ claude mcp add bookmark-manager -- docker run \
             --interactive \
             --volume ~/.data:/app/.data \
             --env FASTMCP_LOG_LEVEL=ERROR \
-            --env AWS_DOCUMENTATION_PARTITION=aws \
             mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0
