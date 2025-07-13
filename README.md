@@ -192,7 +192,7 @@ esbuild index.ts --bundle --platform=node --target=node22 --format=esm --outfile
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-### Synching your bookmark to S3 or vice versa (BYOS3(Bring your own s3 on aws)
+### Synching your bookmark to S3 or vice versa BYOS3(Bring your own s3 on aws)
 - Use below function to copy the data from local to s3 or s3 to local
 ```
 bash
