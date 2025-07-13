@@ -87,8 +87,7 @@ async function loadBookmarks (): Promise<bookmark[]> {
   } catch (error) {
     await mkdir(dirname(bookMarkFileName), { recursive: true })
     const defaultBookmarks: bookmark[] = [
-      { title: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/introduction', category: 'mcp' },
-      { title: 'infinitepi-io', url: 'https://github.com/infinitepi-io', category: 'general' }
+      { title: 'bookmark-mcp', url: 'https://github.com/infinitepi-io/bookmark-mcp', category: 'general' }
     ]
     await saveBookmarks(defaultBookmarks)
     return defaultBookmarks
