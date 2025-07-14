@@ -286,6 +286,7 @@ This project is licensed under the Apache License 2.0.
 **Satish Tripathi**
 
 - GitHub: [@infinitepi-io](https://github.com/infinitepi-io)
+- Blog: https://dev.to/mindriftfall2infinitepiio/building-a-bookmark-manager-with-ai-integration-my-journey-with-model-context-protocol-2j32
 
 ## 🆘 Support
 
@@ -294,7 +295,3 @@ This project is licensed under the Apache License 2.0.
 - **Docker Hub**: [mindriftfall2infinitepiio/mcp](https://hub.docker.com/r/mindriftfall2infinitepiio/bookmark-manager-mcp)
 
 ---
-
-<div align="center">
-  <i>Built with ❤️ using Model Context Protocol</i>
-</div>
