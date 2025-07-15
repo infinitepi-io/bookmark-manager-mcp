@@ -127,12 +127,6 @@ Show me all MCP-related bookmarks
 - **Size**: Optimized for minimal footprint
 - **Volumes**: `/app/.data` for persistent storage
 
-### Environment Variables
-
-```bash
-BOOKMARKS_FILE=/app/.data/bookmarks.json  # Default storage location
-```
-
 ### Volume Mounting
 
 ```bash
