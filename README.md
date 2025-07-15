@@ -2,7 +2,7 @@
 
 > A Model Context Protocol (MCP) server for managing bookmarks with persistent storage
 
-[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-mindriftfall2infinitepiio%2Fmcp-blue?logo=docker)](https://hub.docker.com/r/mindriftfall2infinitepiio/mcp)
+[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-mindriftfall2infinitepiio%2Fmcp-blue?logo=docker)](https://hub.docker.com/r/mindriftfall2infinitepiio/bookmark-manager-mcp)
 [![GitHub](https://img.shields.io/badge/GitHub-infinitepi--io%2Fbookmark--manager--mcp-black?logo=github)](https://github.com/infinitepi-io/bookmark-manager-mcp)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/MCP-1.13.2-green?logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQgOEwxMiAxNEwxMCA4TDEyIDJaIiBmaWxsPSIjMDBkOGZmIi8+CjwvZXZnPgo=)](https://modelcontextprotocol.io)
