@@ -34,6 +34,28 @@ claude mcp add bookmark-manager -- docker run \
     mindriftfall2infinitepiio/mcp:bookmark-manager-v1.0.0
 ```
 
+## 🔧 VS Code Integration
+
+- Create `.vscode/mcp.json`
+
+```json
+{
+  "servers": {
+    "github-bookmark-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--interactive",
+        "--volume",
+        "~/.data:/app/.data",
+        "mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0"
+      ]
+    }
+  }
+}
+```
+
 ### Local Development
 
 ```bash
@@ -54,16 +76,31 @@ pnpm start
 
 ## 🚀 Usage
 
-### MCP Tools Available
+### GitHub Copilot (VS Code)
 
-1. **Add Bookmark** (`add`)
+Agent Mode + Natural Language or `#` prefix
 
-   - Add new bookmarks with title, URL, and optional category
-   - Validates URLs and provides feedback
-2. **List Bookmarks** (`list`)
+```
+Add bookmark for GitHub at https://github.com category development
 
-   - Display all bookmarks in JSON format
-   - Supports filtering by category
+#add bookmark: title "GitHub", url "https://github.com"
+
+#list all my bookmarks in development category
+```
+
+### Claude Code (CLI)
+
+**Setup:** Create `.claude/mcp_servers.json` (same format as above)
+
+**Usage:** `@` prefix
+
+```bash
+claude @bookmark-manager add bookmark for GitHub at https://github.com
+
+claude @bookmark-manager search development bookmarks
+
+claude @bookmark-manager list all bookmarks
+```
 
 ### MCP Resources Available
 
@@ -170,81 +207,10 @@ esbuild index.ts --bundle --platform=node --target=node22 --format=esm --outfile
 ```
 
 ### Synching your bookmark to S3 or vice versa BYOS3(Bring your own s3 on aws)
+
 - Use below function to copy the data from local to s3 or s3 to local
-```
-bash
-bookmark_sync_to_local_tos3() {
-    set -o nounset
-    set -o pipefail
-    IFS=$'\n\t'
 
-    # Define colors for output
-    if [ -t 1 ] && [ -n "$TERM" ] && [ "$TERM" != "dumb" ]; then
-        red='\e[31m'
-        green='\e[32m'
-        yellow='\e[33m'
-        cyan='\e[36m'
-        reset='\e[0m'
-    else
-        red=''
-        green=''
-        yellow=''
-        cyan=''
-        reset=''
-    fi
 
-    # Helper functions for logging
-    info() { echo >&2 -e "${cyan}[i] $*${reset}"; }
-    pass() { echo >&2 -e "${green}[O] $*${reset}"; }
-    fail() { echo >&2 -e "${red}[X] $*${reset}"; return 1; }
-
-    # Sync bookmarks to S3 bucket
-    if command -v aws &> /dev/null; then
-        info "Syncing bookmarks to S3 bucket..."
-        . assume 'xxx' || fail "Failed to assume role for S3 access."
-        aws s3 cp ~/.data/bookmarks.json s3://$BYOS3_NAME/bookmarks.json --source-region BYOS3_REGION && pass "Bookmarks synced successfully." || fail "Failed to sync bookmarks."
-        . assume --unset
-    else
-        fail "AWS CLI not found, cannot sync bookmarks."
-    fi
-}
-
-bookmark_sync_to_s3_to_local() {
-    set -o nounset
-    set -o pipefail
-    IFS=$'\n\t'
-
-    # Define colors for output
-    if [ -t 1 ] && [ -n "$TERM" ] && [ "$TERM" != "dumb" ]; then
-        red='\e[31m'
-        green='\e[32m'
-        yellow='\e[33m'
-        cyan='\e[36m'
-        reset='\e[0m'
-    else
-        red=''
-        green=''
-        yellow=''
-        cyan=''
-        reset=''
-    fi
-
-    # Helper functions for logging
-    info() { echo >&2 -e "${cyan}[i] $*${reset}"; }
-    pass() { echo >&2 -e "${green}[O] $*${reset}"; }
-    fail() { echo >&2 -e "${red}[X] $*${reset}"; return 1; }
-
-    # Sync bookmarks to S3 bucket
-    if command -v aws &> /dev/null; then
-        info "Syncing bookmarks to S3 bucket..."
-        . assume 'xxxx' || fail "Failed to assume role for S3 access."
-        aws s3 cp s3://$BYOS3_NAME/bookmarks.json ~/.data/bookmarks.json --source-region $BYOS3_REGION && pass "Bookmarks synced successfully." || fail "Failed to sync bookmarks."
-        . assume --unset
-    else
-        fail "AWS CLI not found, cannot sync bookmarks."
-    fi
-}
-```
 
 ## 🤝 Contributing
 

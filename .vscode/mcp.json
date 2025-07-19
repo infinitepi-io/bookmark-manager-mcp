@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "github-bookmark-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--interactive",
+        "--volume",
+        "~/.data:/app/.data",
+        "mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0"
+      ]
+    }
+  }
+}
