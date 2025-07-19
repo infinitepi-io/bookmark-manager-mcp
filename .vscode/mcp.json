@@ -8,7 +8,7 @@
         "--interactive",
         "--volume",
         "~/.data:/app/.data",
-        "mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0"
+        "mindriftfall2infinitepiio/bookmark-manager-mcp:latest"
       ]
     }
   }
