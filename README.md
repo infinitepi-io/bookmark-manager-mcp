@@ -31,17 +31,20 @@ claude mcp add bookmark-manager -- docker run \
     --rm \
     --interactive \
     --volume ~/.data:/app/.data \
-    mindriftfall2infinitepiio/mcp:bookmark-manager-v1.0.0
+    docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
 ```
 
 ## 🔧 VS Code Integration
 
+- ```
+  docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+  ```
 - Create `.vscode/mcp.json`
 
 ```json
 {
   "servers": {
-    "github-bookmark-mcp-server": {
+    "bookmark-manager": {
       "command": "docker",
       "args": [
         "run",
@@ -49,7 +52,7 @@ claude mcp add bookmark-manager -- docker run \
         "--interactive",
         "--volume",
         "~/.data:/app/.data",
-        "mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0"
+        "mindriftfall2infinitepiio/bookmark-manager-mcp:latest"
       ]
     }
   }
@@ -89,8 +92,6 @@ Add bookmark for GitHub at https://github.com category development
 ```
 
 ### Claude Code (CLI)
-
-**Setup:** Create `.claude/mcp_servers.json` (same format as above)
 
 **Usage:** `@` prefix
 
@@ -157,30 +158,6 @@ Show me all MCP-related bookmarks
 - **Size**: Optimized for minimal footprint
 - **Volumes**: `/app/.data` for persistent storage
 
-## 🔧 Configuration
-
-### MCP Client Configuration
-
-Add to your MCP client configuration:
-
-```json
-{
-  "mcpServers": {
-    "bookmark-manager": {
-      "command": "docker",
-      "args": ["run", "-v", "~/.data:/app/.data", "mindriftfall2infinitepiio/mcp:bookmark-manager-v1.0.0"]
-    }
-  }
-}
-```
-
-### Custom Storage Location
-
-```bash
-# Set custom storage location
-export BOOKMARKS_FILE=/path/to/your/bookmarks.json
-```
-
 ## 📊 Technical Details
 
 ### Dependencies
@@ -208,9 +185,9 @@ esbuild index.ts --bundle --platform=node --target=node22 --format=esm --outfile
 
 ### Synching your bookmark to S3 or vice versa BYOS3(Bring your own s3 on aws)
 
-- Use below function to copy the data from local to s3 or s3 to local
-
-
+- Use below function to copy the data from local to s3 or s3 to local:
+  - [bookmark_sync_to_local_tos3](https://github.com/infinitepi-io/bookmark-manager-mcp/blob/main/.dev/bookmark_sync_to_local_tos3)
+  - [bookmark_sync_to_s3_to_local](https://github.com/infinitepi-io/bookmark-manager-mcp/blob/main/.dev/bookmark_sync_to_s3_to_local)
 
 ## 🤝 Contributing
 
