@@ -31,7 +31,7 @@ claude mcp add bookmark-manager -- docker run \
     --rm \
     --interactive \
     --volume ~/.data:/app/.data \
-    docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+    mindriftfall2infinitepiio/bookmark-manager-mcp:latest
 ```
 
 ## 🔧 VS Code Integration
