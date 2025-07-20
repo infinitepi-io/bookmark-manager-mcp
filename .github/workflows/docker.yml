@@ -3,6 +3,11 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+        - .github/workflows/**
+        - README.md
+        - SECURITY.md
+        - docs/**
 
 jobs:
   build-and-push:
