@@ -7,6 +7,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![MCP](https://img.shields.io/badge/MCP-1.13.2-green?logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTQgOEwxMiAxNEwxMCA4TDEyIDJaIiBmaWxsPSIjMDBkOGZmIi8+CjwvZXZnPgo=)](https://modelcontextprotocol.io)
 
+<img src="image/README/1753001290532.png" width="400" alt="Bookmark Manager MCP">
+
 ## 📋 Overview
 
 This MCP server provides a simple yet powerful bookmark management system that integrates seamlessly with Claude and other MCP-compatible clients. It offers persistent storage, categorization, and easy retrieval of your bookmarks.

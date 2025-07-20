@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 # Start the MCP server using Docker
-docker build -t mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0 .
+docker buildx build --platform linux/amd64,linux/arm64 \ 
+    -t mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.1 \
+    -t mindriftfall2infinitepiio/bookmark-manager-mcp:latest \
+    --push .
+# Test AMD64 Image
 claude mcp add bookmark-manager -- docker run \
+            --platform linux/amd64 \
             --rm \
             --interactive \
             --volume ~/.data:/app/.data \
-            mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.0
+            mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+# Test ARM64 Image
+claude mcp add bookmark-manager -- docker run \
+            --platform linux/arm64 \
+            --rm \
+            --interactive \
+            --volume ~/.data:/app/.data \
+            mindriftfall2infinitepiio/bookmark-manager-mcp:latest
