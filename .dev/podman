@@ -1,0 +1,13 @@
+podman run \
+    --platform linux/amd64 \
+    --rm \
+    --interactive \
+    --volume ~/.data:/app/.data \
+    mindriftfall2infinitepiio/bookmark-manager-test
+
+claude mcp add bookmark-manager-test -- docker run \
+            --platform linux/arm64 \
+            --rm \
+            --interactive \
+            --volume ~/.data:/app/.data \
+            mindriftfall2infinitepiio/podman-bookmark-manager:v1.0.0

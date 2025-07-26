@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
-# Start the MCP server using Docker
-docker buildx build --platform linux/amd64,linux/arm64 \ 
+# Start the MCP server using Podman
+podman build --platform linux/amd64,linux/arm64 \ 
     -t mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.1 \
-    -t mindriftfall2infinitepiio/bookmark-manager-mcp:latest \
-    --push .
+    -t mindriftfall2infinitepiio/bookmark-manager-mcp:latest .
+podman push mindriftfall2infinitepiio/bookmark-manager-mcp:v1.0.1
+podman push mindriftfall2infinitepiio/bookmark-manager-mcp:latest
 # Test AMD64 Image
-claude mcp add bookmark-manager -- docker run \
+claude mcp add bookmark-manager -- podman run \
             --platform linux/amd64 \
             --rm \
             --interactive \
             --volume ~/.data:/app/.data \
             mindriftfall2infinitepiio/bookmark-manager-mcp:latest
 # Test ARM64 Image
-claude mcp add bookmark-manager -- docker run \
+claude mcp add bookmark-manager -- podman run \
             --platform linux/arm64 \
             --rm \
             --interactive \
