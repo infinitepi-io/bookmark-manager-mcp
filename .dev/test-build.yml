@@ -19,21 +19,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-      
-    - name: Test Docker build
-      uses: docker/build-push-action@v5
+    - name: Test Podman build
+      uses: redhat-actions/buildah-build@v2
       with:
-        context: .
-        push: false
-        tags: bookmark-manager-mcp:test
+        image: bookmark-manager-mcp
+        tags: test
+        containerfiles: ./Containerfile
         platforms: linux/amd64
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
         
     - name: Test application startup
       run: |
-        docker build -t bookmark-manager-test .
-        timeout 10 docker run --rm bookmark-manager-test || true
+        sudo apt-get update && sudo apt-get install -y podman
+        podman build -t bookmark-manager-test .
+        timeout 10 podman run --rm bookmark-manager-test || true
         echo "Build test completed successfully"

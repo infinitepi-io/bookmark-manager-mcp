@@ -18,7 +18,7 @@ This MCP server provides a simple yet powerful bookmark management system that i
 - **📁 Persistent Storage**: Bookmarks are saved to `~/.data/bookmarks.json`
 - **🏷️ Categories**: Organize bookmarks with custom categories
 - **🔍 Resource Discovery**: Browse bookmarks by category using MCP resources
-- **🐳 Docker Support**: Ready-to-use Docker image
+- **🐳 Container Support**: Ready-to-use container image (Docker/Podman)
 - **⚡ TypeScript**: Type-safe implementation with Zod validation
 - **🔗 MCP Integration**: Full Model Context Protocol compliance
 
@@ -27,9 +27,17 @@ This MCP server provides a simple yet powerful bookmark management system that i
 ## 🔧 Claude Code Integration
 
 ```bash
-# Add to Claude Code
+# Add to Claude Code (Docker)
 docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
 claude mcp add bookmark-manager -- docker run \
+    --rm \
+    --interactive \
+    --volume ~/.data:/app/.data \
+    mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+
+# Or with Podman
+podman pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+claude mcp add bookmark-manager -- podman run \
     --rm \
     --interactive \
     --volume ~/.data:/app/.data \
@@ -38,9 +46,14 @@ claude mcp add bookmark-manager -- docker run \
 
 ## 🔧 VS Code Integration
 
-- ```
-  docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
-  ```
+```bash
+# Docker
+docker pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+
+# Or Podman
+podman pull mindriftfall2infinitepiio/bookmark-manager-mcp:latest
+```
+
 - Create `.vscode/mcp.json`
 
 ```json
@@ -48,6 +61,26 @@ claude mcp add bookmark-manager -- docker run \
   "servers": {
     "bookmark-manager": {
       "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "--interactive",
+        "--volume",
+        "~/.data:/app/.data",
+        "mindriftfall2infinitepiio/bookmark-manager-mcp:latest"
+      ]
+    }
+  }
+}
+```
+
+**For Podman users:**
+
+```json
+{
+  "servers": {
+    "bookmark-manager": {
+      "command": "podman",
       "args": [
         "run",
         "--rm",
@@ -127,7 +160,7 @@ Show me all MCP-related bookmarks
 ### Storage Location
 
 - **Local**: `~/.data/bookmarks.json`
-- **Docker**: `/app/.data/bookmarks.json` (mount your local `~/.data` directory)
+- **Container (Docker/Podman)**: `/app/.data/bookmarks.json` (mount your local `~/.data` directory)
 
 ### Data Format
 
@@ -152,7 +185,7 @@ Show me all MCP-related bookmarks
 - **Error Handling**: Graceful error handling for file operations
 - **Backup Strategy**: Simple JSON format allows easy backup and restoration
 
-## 🐳 Docker Configuration
+## 🐳 Container Configuration
 
 ### Image Details
 
@@ -214,6 +247,6 @@ This project is licensed under the Apache License 2.0.
 
 - **Issues**: [GitHub Issues](https://github.com/infinitepi-io/bookmark-manager-mcp/issues)
 - **Documentation**: [MCP Documentation](https://modelcontextprotocol.io/introduction)
-- **Docker Hub**: [mindriftfall2infinitepiio/mcp](https://hub.docker.com/r/mindriftfall2infinitepiio/bookmark-manager-mcp)
+- **Container Registry**: [mindriftfall2infinitepiio/mcp](https://hub.docker.com/r/mindriftfall2infinitepiio/bookmark-manager-mcp)
 
 ---
