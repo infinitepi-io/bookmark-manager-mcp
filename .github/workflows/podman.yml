@@ -17,14 +17,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
+    - name: Install qemu dependency
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y qemu-user-static
+        
     - name: Log in to Docker Hub
       uses: redhat-actions/podman-login@v1
       with:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        
-    - name: Build container image
+
+    - name: Build container image using Podman
       id: build
       uses: redhat-actions/buildah-build@v2
       with:
@@ -32,8 +37,8 @@ jobs:
         tags: latest
         containerfiles: ./Containerfile
         platforms: linux/amd64,linux/arm64
-        
-    - name: Push container image
+
+    - name: Push container image using Podman
       uses: redhat-actions/push-to-registry@v2
       with:
         image: ${{ steps.build.outputs.image }}
