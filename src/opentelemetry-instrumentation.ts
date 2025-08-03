@@ -9,7 +9,7 @@ import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http'
 const collectorOptions = {
   url: 'https://api.openobserve.ai/api/30QWFpDZcdoR8qGbMoXvpLUQGLj/v1/metrics',
   headers: {
-    Authorization: 'Basic c3RyaXBhdGhpLWluZmluaXRlcGlAcHJvdG9ubWFpbC5jb206SUpwS2szdzJWTUtKRXJZcg==',
+    Authorization: process.env.OPENOBSERVE_TOKEN || '',
     organization: '30QWFpDZcdoR8qGbMoXvpLUQGLj'
   },
   // concurrencyLimit: 1, // an optional limit on pending requests

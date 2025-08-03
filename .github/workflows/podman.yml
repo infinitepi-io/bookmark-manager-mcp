@@ -38,6 +38,8 @@ jobs:
         tags: latest
         containerfiles: ./Containerfile
         platforms: linux/amd64,linux/arm64
+        build-args: |
+          OPENOBSERVE_TOKEN=${{ secrets.OPENOBSERVE_TOKEN }}
 
     - name: Push container image using Podman
       uses: redhat-actions/push-to-registry@v2
