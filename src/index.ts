@@ -6,15 +6,6 @@ import { homedir } from 'os'
 // Zod is a TypeScript schema validation library used for runtime type checking and validation
 // It helps define the structure and validation rules for input data in MCP tool schemas
 import { z } from 'zod'
-// Initialize OpenTelemetry with HTTP exporter
-import './opentelemetry-instrumentation.js'
-import * as opentelemetry from '@opentelemetry/api'
-// Get a meter
-const meter = opentelemetry.metrics.getMeter('add-function-example', '1.0.0')
-// Create a counter metric to track function calls
-const addFunctionCounter = meter.createCounter('bookmark-manager-mcp', {
-  description: 'Bookmark Manager MCP OpenTelemetry Counter Metrics'
-})
 
 // Create an MCP server
 const server = new McpServer({
@@ -23,9 +14,9 @@ const server = new McpServer({
 })
 
 // Simple bookmark storage
-interface bookmark {
-  title: string
-  url: string
+type bookmark = {
+  title: string,
+  url: string,
   category: string
 }
 
@@ -39,7 +30,7 @@ async function saveBookmarks (bookmarksToSave: bookmark[]): Promise<void> {
   } catch (error) {
     throw new Error(`Failed to save bookmarks: ${error instanceof Error ? error.message : 'Unknown error'}`)
   } finally {
-    if (fileHandle != null) {
+    if (fileHandle) {
       await fileHandle.close()
     }
   }
@@ -57,15 +48,6 @@ server.registerTool('add',
     }
   },
   async ({ title, url, category = 'general' }) => {
-    try {
-      addFunctionCounter.add(1, {
-        operation: 'add',
-        function_name: 'add'
-      })
-    } catch (error) {
-      console.error('Telemetry error:', error)
-    }
-
     const bookmark = { title, url, category }
     bookmarks.push(bookmark)
     await saveBookmarks(bookmarks)
@@ -87,15 +69,6 @@ server.registerTool('list',
     inputSchema: {}
   },
   async () => {
-    try {
-      addFunctionCounter.add(1, {
-        operation: 'list',
-        function_name: 'list'
-      })
-    } catch (error) {
-      console.error('Telemetry error:', error)
-    }
-
     return {
       content: [{
         type: 'text',
@@ -120,7 +93,7 @@ async function loadBookmarks (): Promise<bookmark[]> {
     await saveBookmarks(defaultBookmarks)
     return defaultBookmarks
   } finally {
-    if (fileHandle != null) {
+    if (fileHandle) {
       await fileHandle.close()
     }
   }
@@ -136,7 +109,7 @@ server.registerResource(
       resources: [
         { name: 'bookmarks://all', uri: 'bookmarks://all', description: 'All bookmarks' },
         { name: 'bookmarks://mcp', uri: 'bookmarks://mcp', description: 'MCP bookmarks' },
-        { name: 'bookmarks://general', uri: 'bookmarks://general', description: 'General bookmarks' }
+        { name: 'bookmarks://general', uri: 'bookmarks://general', description: 'General bookmarks' },
       ]
     })
   }),

@@ -193,12 +193,6 @@ Show me all MCP-related bookmarks
 - **Size**: Optimized for minimal footprint
 - **Volumes**: `/app/.data` for persistent storage
 
-## 🔒 Privacy & Security
-
-- **OpenTelemetry Data Collection**: We collect telemetry data only for the tool list and add calls to improve performance and debugging
-- **No Personal Data**: We do not collect any personal information or bookmark content
-- **Security First**: We prioritize your privacy and data security in all our implementations
-
 ## 📊 Technical Details
 
 ### Dependencies
