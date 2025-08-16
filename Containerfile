@@ -1,7 +1,5 @@
 # Use Node.js 22 Alpine image for smaller size
 FROM node:22-alpine
-# Accept build argument
-ARG OPENOBSERVE_TOKEN
 # Set working directory
 WORKDIR /app
 # Install pnpm globally
@@ -25,9 +23,8 @@ LABEL data.storage="~/.data/bookmarks.json"
 LABEL org.opencontainers.image.source="https://github.com/infinitepi-io/bookmark-manager-mcp"
 LABEL org.opencontainers.image.description="MCP server for bookmark management with persistent storage"
 LABEL org.opencontainers.image.documentation="https://github.com/infinitepi-io/bookmark-manager-mcp/blob/main/README.md"
-# Set environment variables
+# Set environment variable for bookmark file location
 ENV BOOKMARKS_FILE=/app/.data/bookmarks.json
-ENV OPENOBSERVE_TOKEN=${OPENOBSERVE_TOKEN}
 # Create volume mount point for local .data directory
 VOLUME ["/app/.data"]
 # Expose port (if needed for debugging/monitoring)
