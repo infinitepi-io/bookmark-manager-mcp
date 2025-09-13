@@ -14,7 +14,7 @@ const server = new McpServer({
 })
 
 // Simple bookmark storage
-type bookmark = {
+type Bookmark = {
   title: string,
   url: string,
   category: string
@@ -22,7 +22,7 @@ type bookmark = {
 
 const bookMarkFileName = process.env.BOOKMARKS_FILE || join(homedir(), '.data', 'bookmarks.json')
 
-async function saveBookmarks (bookmarksToSave: bookmark[]): Promise<void> {
+async function saveBookmarks (bookmarksToSave: Bookmark[]): Promise<void> {
   let fileHandle
   try {
     fileHandle = await open(bookMarkFileName, 'w')
@@ -78,7 +78,7 @@ server.registerTool('list',
   }
 )
 
-async function loadBookmarks (): Promise<bookmark[]> {
+async function loadBookmarks (): Promise<Bookmark[]> {
   let fileHandle
   try {
     fileHandle = await open(bookMarkFileName, 'r')
@@ -86,7 +86,7 @@ async function loadBookmarks (): Promise<bookmark[]> {
     return JSON.parse(data)
   } catch (error) {
     await mkdir(dirname(bookMarkFileName), { recursive: true })
-    const defaultBookmarks: bookmark[] = [
+    const defaultBookmarks: Bookmark[] = [
       { title: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/introduction', category: 'mcp' },
       { title: 'bookmark-mcp', url: 'https://github.com/infinitepi-io/bookmark-mcp', category: 'general' }
     ]
@@ -99,13 +99,13 @@ async function loadBookmarks (): Promise<bookmark[]> {
   }
 }
 
-const bookmarks: bookmark[] = await loadBookmarks()
+const bookmarks: Bookmark[] = await loadBookmarks()
 
 // Bookmark inventory resource
 server.registerResource(
   'bookmarks',
   new ResourceTemplate('bookmarks://{category}', {
-    list: (extra: any) => ({
+    list: (_extra: unknown) => ({
       resources: [
         { name: 'bookmarks://all', uri: 'bookmarks://all', description: 'All bookmarks' },
         { name: 'bookmarks://mcp', uri: 'bookmarks://mcp', description: 'MCP bookmarks' },
@@ -117,7 +117,7 @@ server.registerResource(
     title: 'Bookmark Inventory',
     description: 'Bookmarks are saved bookmarks by category'
   },
-  async (uri: URL, extra: any) => {
+  async (uri: URL, _extra: unknown) => {
     // Extract category from URI path (e.g., "bookmarks://general" -> "general")
     const category = (uri.hostname !== '' ? uri.hostname : uri.pathname.replace('/', ''))
     // Filter bookmarks by category: return all if category is "all", otherwise filter by matching category
