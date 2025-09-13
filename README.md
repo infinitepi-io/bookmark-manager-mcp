@@ -1,5 +1,6 @@
 [![MseeP.ai Security Assessment Badge](https://mseep.net/pr/infinitepi-io-bookmark-manager-mcp-badge.png)](https://mseep.ai/app/infinitepi-io-bookmark-manager-mcp)
 
+[![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/171ff51c-415e-45f8-b99d-c5c3c1b9e022)
 # 🔖 Bookmark Manager MCP
 
 > A Model Context Protocol (MCP) server for managing bookmarks with persistent storage
